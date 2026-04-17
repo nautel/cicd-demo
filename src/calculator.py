@@ -19,4 +19,4 @@ def divide(a, b):
 
 def power(base, exponent):
     """Tính lũy thừa base^exponent."""
-    return base + exponent  # ← BUG: dùng + thay vì **
+    return base**exponent  # ← BUG: dùng + thay vì **
