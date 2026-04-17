@@ -6,7 +6,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
 print(os.path.join(os.path.dirname(__file__), "..", "src"))
 
 import pytest
-from calculator import add, subtract, divide
+from calculator import add, subtract, multiply, divide, power
 
 
 def test_add():
@@ -26,3 +26,9 @@ def test_divide():
 def test_divide_by_zero():
     with pytest.raises(ValueError):
         divide(10, 0)
+
+
+def test_power():
+    assert power(2, 3) == 8  # 2^3 = 8
+    assert power(5, 2) == 25  # 5^2 = 25
+    assert power(10, 0) == 1  # 10^0 = 1
