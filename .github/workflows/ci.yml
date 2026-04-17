@@ -1,0 +1,42 @@
+name: CI Pipeline
+
+# TRIGGER: khi nao chay pipeline
+
+on:
+  push:
+    branches: [ main ] # khi push len main
+  pull_request:
+    branches: [ main ] # khi tao PR vao main
+
+# JOBS: cac cong viec can lam
+jobs:
+  test:
+    name: Run Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      # step 1: clone code ve runner
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # step 2: cai python
+      - name: Set up python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      # step 3: Install dependencies
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      # step 4: Chay test
+      - name: Run tests with pytest
+        run: |
+          pytest tests/ -v --cov=src
+
+      # step 5: bao cao ket qua
+      - name: Test summary
+        if: always()
+        run: echo "Pipeline hoan thanh"
